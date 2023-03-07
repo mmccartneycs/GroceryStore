@@ -89,7 +89,7 @@ public class GroceryController{
     }*/
 
     private void getProductsHandler(Context ctx) throws JsonProcessingException{
-        ctx.json(productService.getAllGroceries());
+        ctx.json(productService.getAllProducts());
     }
 
     private void getItemByNameHandler(Context ctx) throws JsonProcessingException{
@@ -108,6 +108,6 @@ public class GroceryController{
     }
     private void getFiltersHandler(Context ctx) throws JsonProcessingException{
         String filters = ctx.pathParam("filters");
-        ctx.json(productService.getGroceriesByFilters(filters));
+        ctx.json(productService.getProductsByFilters(filters));
     }
 }
