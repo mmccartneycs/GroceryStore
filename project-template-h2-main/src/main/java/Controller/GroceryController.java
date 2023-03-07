@@ -25,41 +25,55 @@ public class GroceryController{
 
         app.post("/register", this::postUserHandeler);
         app.post("/login", this::postLoginUserHandler);
-        app.patch("/member/{member_id}", this::patchUserInfoHandler);
-        app.put("/cart", this::putCartHandler);
-        app.delete("/cart", this::deleteCartHandler);
+        //app.patch("/member/{member_id}", this::patchUserInfoHandler);
+        app.patch("/cart/{quantity}", this:patchCartHandler());
         app.get("/cart", this::getCartHandler);
         app.get("/cart/checkout", this::getCheckoutMemberHandler);
         app.post("/cart/checkout", this::postCheckoutHandler);
-        app.get("/products", this::getProductsHandler);
-        app.get("/products/{item}", this::getItemHandler);
-        app.get("/search", this::getSearchHandler);
-        app.get"/search/{filters}", this::getFiltersHandler);
+        app.get("/grocery", this::getGroceriesHandler);
+        app.get("/grocery/{item}", this::getItemHandler);
+        app.get("/grocery/{search}", this::getSearchHandler);
+        app.get("/grocery/{filters}", this::getFiltersHandler);
         return app;
     }
 
     private void postUserHandeler(Context ctx) throws JsonProcessingException{
-
+        ObjectMapper om = new ObjectMapper();
+        User user = om.readVaoue(ctx.body(), User.class);
+        User newUser = userService.addUser(user);
+        if(newUser != null){
+            ctx.json(newUser);
+        }else{
+            ctx.status(400);
+        }
     }
 
     private void postLoginUserHandler(Context ctx) throws JsonProcessingException{
-
+        ObjectMapper om = new ObjectMapper();
+        User user = om.readValue(ctx.body(), User.class);
+        User login = userService.verifyUser(user);
+        if(login != null){
+            ctx.json(login);
+        }else{
+            ctx.status(401);
+        }
     }
 
-    private void patchUserInfoHandler(Context ctx) throws JsonProcessingException{
+    /*private void patchUserInfoHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper
+    }*/
 
-    }
-
-    private void putCartHandler(Context ctx) throws JsonProcessingException{
-
-    }
-
-    private void deleteCartHandler(Context ctx) throws JsonProcessingException{
-
+    private void patchCartHandler(Context ctx) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        Grocery grocery = om.readValue(ctx.body(), Grocery.class);
+        int upc = grocery.getUpc();
+        String q_input = ctx.pathParam("quantity");
+        int q = Integer.parseInt(q_input);
+        Grocery patchedGrocery = GroceryController.patchCartByUpc(upc, q);
     }
 
     private void getCartHandler(Context ctx) throws JsonProcessingException{
-
+        ctx.json(groceryService.getCart());
     }
 
     private void getCheckoutMemberHandler(Context ctx) throws JsonProcessingException{
@@ -70,17 +84,26 @@ public class GroceryController{
 
     }
 
-    private void getProductsHandler(Context ctx) throws JsonProcessingException{
-
+    private void getGroceriesHandler(Context ctx) throws JsonProcessingException{
+        ctx.json(groceryService.getAllGroceries());
     }
 
     private void getItemHandler(Context ctx) throws JsonProcessingException{
-
+        String item_input = ctx.pathParam("item");
+        Grocery grocery = groceryService.getGroceryByName(item_input);
+        if(grocery != null){
+            ctx.json(grocery);
+        }
     }
     private void getSearchHandler(Context ctx) throws JsonProcessingException{
-
+        String search_input = ctx.pathParam("search");
+        Grocery grocery = groceryService.getGroceryByName(search_input);
+        if(grocery != null){
+            ctx.json(grocery);
+        }
     }
     private void getFiltersHandler(Context ctx) throws JsonProcessingException{
-
+        String filters = ctx.pathParam("filters");
+        ctx.json(groceryService.getGroceriesByFilters(filters));
     }
 }
