@@ -26,11 +26,61 @@ public class GroceryController{
         app.post("/register", this::postUserHandeler);
         app.post("/login", this::postLoginUserHandler);
         app.patch("/member/{member_id}", this::patchUserInfoHandler);
-        app.put
+        app.put("/cart", this::putCartHandler);
+        app.delete("/cart", this::deleteCartHandler);
+        app.get("/cart", this::getCartHandler);
+        app.get("/cart/checkout", this::getCheckoutMemberHandler);
+        app.post("/cart/checkout", this::postCheckoutHandler);
+        app.get("/products", this::getProductsHandler);
+        app.get("/products/{item}", this::getItemHandler);
+        app.get("/search", this::getSearchHandler);
+        app.get"/search/{filters}", this::getFiltersHandler);
         return app;
     }
 
     private void postUserHandeler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void postLoginUserHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void patchUserInfoHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void putCartHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void deleteCartHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void getCartHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void getCheckoutMemberHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void postCheckoutHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void getProductsHandler(Context ctx) throws JsonProcessingException{
+
+    }
+
+    private void getItemHandler(Context ctx) throws JsonProcessingException{
+
+    }
+    private void getSearchHandler(Context ctx) throws JsonProcessingException{
+
+    }
+    private void getFiltersHandler(Context ctx) throws JsonProcessingException{
 
     }
 }
