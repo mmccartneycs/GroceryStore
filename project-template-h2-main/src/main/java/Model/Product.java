@@ -1,14 +1,14 @@
 public class Product{
-    public int productId;
+    public int upc;
     public String userEmail;
     public String password;
 
-    public int getProductId() {
-        return productId;
+    public int getUpc() {
+        return upc;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setUpc(int upc) {
+        this.upc = upc;
     }
 
     public String getUserEmail() {
