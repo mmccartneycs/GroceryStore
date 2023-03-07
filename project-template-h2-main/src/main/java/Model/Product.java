@@ -1,7 +1,8 @@
 public class Product{
     public int upc;
-    public String userEmail;
-    public String password;
+    public double price;
+    public String name;
+    public String description;
 
     public int getUpc() {
         return upc;
@@ -11,19 +12,27 @@ public class Product{
         this.upc = upc;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public double getPrice() {
+        return price;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
