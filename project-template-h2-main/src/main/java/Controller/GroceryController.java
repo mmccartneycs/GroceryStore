@@ -1,11 +1,11 @@
 package Controller;
 
+import Model.Cart;
 import Model.Product;
 import Model.User;
-import Model.Cart;
+import Service.CartService;
 import Service.ProductService;
 import Service.UserService;
-import Service.CartService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonpCharacterEscapes;
 import com.fasterxml.jackson.core.io.JsonEOFException;
@@ -15,11 +15,13 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 public class GroceryController{
+    CartService cartService;
     ProductService productService;
     UserService userService;
     public GroceryController(){
+        this.cartService = new CartService();
         this.productService = new ProductService();
-        this.userService = new UserService;
+        this.userService = new UserService();
     }
 
     public Javalin startAPI(){
@@ -89,7 +91,7 @@ public class GroceryController{
     }*/
 
     private void getProductsHandler(Context ctx) throws JsonProcessingException{
-        ctx.json(productService.getAllGroceries());
+        ctx.json(productService.getAllProducts());
     }
 
     private void getItemByNameHandler(Context ctx) throws JsonProcessingException{
@@ -108,6 +110,6 @@ public class GroceryController{
     }
     private void getFiltersHandler(Context ctx) throws JsonProcessingException{
         String filters = ctx.pathParam("filters");
-        ctx.json(productService.getGroceriesByFilters(filters));
+        ctx.json(productService.getProductsByFilters(filters));
     }
 }
