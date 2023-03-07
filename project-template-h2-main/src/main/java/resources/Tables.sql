@@ -4,6 +4,7 @@
 
 drop table if exists product;
 drop table if exists user;
+drop table if exists cart;
 create table user (
     account_id int primary key AUTO_INCREMENT,
     email varchar(255) unique,
@@ -15,3 +16,10 @@ create table product (
     name varchar(255),
     description text(2500)
 );
+create table cart(
+    account_id int foreign key not null,
+    upc int foreign key,
+    cart_id int primary key not null
+    quantity int
+);
+
