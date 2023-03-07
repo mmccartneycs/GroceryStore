@@ -1,6 +1,6 @@
 # GroceryStore
 
-Michael McCartney/ Josephy Rebuck
+Michael McCartney / Joseph Rebuck
 
 Grocery Store
 

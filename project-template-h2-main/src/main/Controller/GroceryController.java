@@ -24,6 +24,9 @@ public class GroceryController{
         Javalin app = Javalin.create();
 
         app.post("/register", this::postUserHandeler);
+        app.post("/login", this::postLoginUserHandler);
+        app.patch("/member/{member_id}", this::patchUserInfoHandler);
+        app.put
         return app;
     }
 
