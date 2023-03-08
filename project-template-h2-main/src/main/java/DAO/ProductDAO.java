@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class ProductDAO{
 
-    public User getAllProducts(Product product){
+    public List<Product> getAllProducts(){
         Connection connection = ConnectionSingleton.getConnection();
         List<Product> products = new ArrayList<>();
         try {
@@ -16,19 +16,19 @@ public class ProductDAO{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
-                Product product = new Product(rs.getInt("upc"),
+                Product p = new Product(rs.getInt("upc"),
                         rs.getInt("price"),
                         rs.getString("name"),
                         rs.getString("description"));
-                products.add(product);
+                products.add(p);
             }
         }catch(SQLException e){
-            System.out.println(e.getProduct());
+            System.out.println(e.getMessage());
         }
         return products;
     }
 
-    public User getProductByName(String filter){
+    public Product getProductByName(String filter){
         Connection connection = ConnectionSingleton.getConnection();
         try {
             String sql = "select * from product where name  = ?;";
@@ -43,12 +43,12 @@ public class ProductDAO{
                 return retProduct;
             }
         }catch(SQLException e){
-            System.out.println(e.getProduct());
+            System.out.println(e.getMessage());
         }
         return null;
     }
 
-    public User getProductsByFilters(String filter){
+    public List<Product> getProductsByFilters(String filter){
         Connection connection = ConnectionSingleton.getConnection();
         try {
             //TODO: create field for tags. change sql description to tags.
@@ -66,7 +66,7 @@ public class ProductDAO{
             }
             return products;
         } catch (SQLException e) {
-            System.out.println(e.getProduct());
+            System.out.println(e.getMessage());
         }
         return null;
     }

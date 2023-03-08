@@ -14,6 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.List;
+
 public class GroceryController{
     CartService cartService;
     ProductService productService;
@@ -96,7 +98,7 @@ public class GroceryController{
 
     }*/
 
-    private void getProductsHandler(Context ctx) throws JsonProcessingException{
+    private List<Product> getProductsHandler(Context ctx) throws JsonProcessingException{
         ctx.json(productService.getAllProducts());
     }
 

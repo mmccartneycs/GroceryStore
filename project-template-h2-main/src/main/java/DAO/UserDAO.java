@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Cart;
+import Model.User;
 import Util.ConnectionSingleton;
 
 import java.sql.*;
@@ -26,17 +26,21 @@ public class UserDAO{
         return null;
     }
 
-    public User validateUser(User user) throws SQLException{
+    public User validateUser(User user){
         Connection connection = ConnectionSingleton.getConnection();
-        String sql = "select * from user where email = ? and password = ?;";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try {
+            String sql = "select * from user where email = ? and password = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setString(1, user.getUserEmail());
-        preparedStatement.setString(2, user.getPassword());
-        ResultSet rs = preparedStatement.executeQuery();
-        while(rs.next()){
-            User existingUser = new User( rs.getInt("user_id"), rs.getString("userEmail"), rs.getString("password"));
-            return existingUser;
+            preparedStatement.setString(1, user.getUserEmail());
+            preparedStatement.setString(2, user.getPassword());
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User existingUser = new User(rs.getInt("user_id"), rs.getString("userEmail"), rs.getString("password"));
+                return existingUser;
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
         }
 
         return null;

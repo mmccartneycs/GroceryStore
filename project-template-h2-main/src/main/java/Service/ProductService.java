@@ -1,27 +1,26 @@
 package Service;
 
 import Model.Product;
-import Model.User;
 import DAO.ProductDAO;
-import DAO.UserDAO;
+
+import java.util.List;
 
 public class ProductService{
     private ProductDAO productDAO;
-    private UserDAO userDAO;
 
     public ProductService(){
         productDAO = new ProductDAO();
     }
 
-    public User getAllProducts(Product product){
-        return userDAO.getAllProducts(product);
+    public List<Product> getAllProducts(){
+        return productDAO.getAllProducts();
     }
 
-    public User getProductByName(String filter){
-        return userDAO.getProductByName(filter);
+    public Product getProductByName(String filter){
+        return productDAO.getProductByName(filter);
     }
 
-    public User getProductsByFilters(String filter){
-        return userDAO.getProductsByFilters(filter);
+    public List<Product> getProductsByFilters(String filter){
+        return productDAO.getProductsByFilters(filter);
     }
 }

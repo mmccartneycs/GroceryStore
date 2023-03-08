@@ -6,6 +6,17 @@ public class Product{
     public String name;
     public String description;
 
+    public Product(){
+
+    }
+
+    public Product(int upc, double price, String name, String description){
+        this.upc = upc;
+        this.price = price;
+        this.name = name;
+        this.description = description;
+    }
+
     public int getUpc() {
         return upc;
     }

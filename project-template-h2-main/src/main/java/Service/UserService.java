@@ -5,6 +5,9 @@ import DAO.UserDAO;
 
 public class UserService{
     private UserDAO userDAO;
+    public UserService(){
+        userDAO = new UserDAO();
+    }
 
 
     public User addUser(User user){

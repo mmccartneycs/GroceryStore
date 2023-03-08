@@ -5,6 +5,16 @@ public class User {
     public String userEmail;
     public String password;
 
+    public User(){
+
+    }
+
+    public User(int userId, String userEmail, String password){
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.password = password;
+    }
+
     public int getUserId() {
         return userId;
     }
