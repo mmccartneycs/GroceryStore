@@ -31,7 +31,7 @@ public class GroceryController{
         app.post("/login", this::postLoginUserHandler);
         //app.patch("/member/{member_id}", this::patchUserInfoHandler);
         app.patch("/cart/{quantity}", this:patchCartHandler());
-        app.get("/cart", this::getCartHandler);
+        app.get("/cart/{cart_id}", this::getCartHandler);
         app.get("/checkout/{member_id}", this::getCheckoutMemberHandler);
         //app.post("/cart/checkout", this::postCheckoutHandler);
         app.get("/product", this::getProductsHandler);
@@ -70,14 +70,20 @@ public class GroceryController{
     private void patchCartHandler(Context ctx) throws JsonProcessingException{
         ObjectMapper om = new ObjectMapper();
         Cart cart = om.readValue(ctx.body(), Cart.class);
-        int upc = product.getUpc();
-        String q_input = ctx.pathParam("quantity");
-        int q = Integer.parseInt(q_input);
-        Cart patchedCart = CartService.patchCartByUpc(upc, q);
+        int id = cart.getCart_id();
+        int upc = cart.getUpc();
+        int q = cart.getQuantity();
+        Cart patchedCart = CartService.patchCartByUpc(id, upc, q);
+        if(patchedCart != null)
+            ctx.json(patchedCart);
+        else
+            ctx.json("Empty cart");
     }
 
     private void getCartHandler(Context ctx) throws JsonProcessingException{
-        ctx.json(cartService.getCart());
+        String user_id = ctx.pathParam("cart_id");
+        int id = Integer.parseInt(user_id);
+        ctx.json(cartService.getCart(id));
     }
 
     private void getCheckoutMemberHandler(Context ctx) throws JsonProcessingException{

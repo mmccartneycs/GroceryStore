@@ -15,7 +15,12 @@ public class CartService{
         productDAO = new ProductDAO();
     }
 
-    public List<Cart> getCart(){
-        return cartDAO.getFullCart();
+    public List<Cart> getCart(int cart_id){
+        return cartDAO.getFullCart(cart_id);
+    }
+
+    public List<Cart> patchCartByUpc(int cart_id, int upc, int quantity){
+        cartDAO.patchCartByUpc(cart_id, upc, quantity);
+        return cartDAO.getFullCart(cart_id);
     }
 }
