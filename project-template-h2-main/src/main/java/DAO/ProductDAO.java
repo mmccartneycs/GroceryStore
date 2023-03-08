@@ -25,7 +25,7 @@ public class ProductDAO{
         try {
             String sql = "select * from product where name  = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, filter);
+            preparedStatement.setString(1, filter);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 Product retProduct = new Product(rs.getInt("upc"),
@@ -46,7 +46,7 @@ public class ProductDAO{
             //TODO: create field for tags. change sql description to tags.
             String sql = "SELECT * FROM product WHERE description contains '?';";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, filter);
+            preparedStatement.setString(1, filter);
             ResultSet rs = preparedStatement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
