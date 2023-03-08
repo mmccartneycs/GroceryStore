@@ -1,7 +1,7 @@
 
 public class UserDAO{
 
-    public User insertUser(User user){
+    public User addUser(User user){
         Connection connection = ConnectionUtil.getConnection();
         try {
             String sql = "insert into user (email, password) values (?,?); " ;
@@ -21,7 +21,7 @@ public class UserDAO{
         return null;
     }
 
-    public User getUser(User user) throws SQLException{
+    public User validateUser(User user) throws SQLException{
         Connection connection = ConnectionUtil.getConnection();
         String sql = "select * from user where email = ? and password = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
