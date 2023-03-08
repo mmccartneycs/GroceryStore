@@ -1,7 +1,7 @@
 package DAO;
 
 import Model.Cart;
-import Util.ConnectionUtil;
+import Util.ConnectionSingleton;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CartDAO{
 
-    public List<Cart> getCart(cart_id){
-        Connection con = ConnectionUtil.getConnection();
+    public List<Cart> getCart(int cart_id){
+        Connection con = ConnectionSingleton.getConnection();
         List<Cart> cartList = new ArrayList<>();
         try{
             String sql = "SELECT * FROM cart WHERE cart_id = ?;";
@@ -18,19 +18,21 @@ public class CartDAO{
             ps.setInt(1, cart_id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Cart cart = new Cart(rs.getint("upc"),
+                Cart cart = new Cart(rs.getInt("account_id"),
+                        rs.getInt("cart_id"),
+                        rs.getInt("upc"),
                         rs.getInt("quantity"));
                 cartList.add(cart);
             }
         }
         catch(SQLException e){
-            System.out.println(e.getCart());
+            System.out.println(e.getMessage());
         }
         return cartList;
     }
 
-    public patchCartByUpc(int cart_id, int upc, int quantity){
-        Connection con = ConnectionUtil.getConnection();
+    public void patchCartByUpc(int cart_id, int upc, int quantity){
+        Connection con = ConnectionSingleton.getConnection();
         List<Cart> cartList = new ArrayList<>();
         try{
             String sql = "UPDATE cart SET quantity = ? WHERE cart_id = ? AND upc = ?;";
@@ -41,7 +43,7 @@ public class CartDAO{
             ps.executeUpdate();
         }
         catch(SQLException e){
-            System.out.println(e.getCart());
+            System.out.println(e.getMessage());
         }
     }
 

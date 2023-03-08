@@ -1,7 +1,7 @@
 package DAO;
 
 import Model.Product;
-import Util.ConnectionUtil;
+import Util.ConnectionSingleton;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 public class ProductDAO{
 
     public User getAllProducts(Product product){
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = ConnectionSingleton.getConnection();
         List<Product> products = new ArrayList<>();
         try {
             String sql = "select * from product;";
@@ -29,7 +29,7 @@ public class ProductDAO{
     }
 
     public User getProductByName(String filter){
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = ConnectionSingleton.getConnection();
         try {
             String sql = "select * from product where name  = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class ProductDAO{
     }
 
     public User getProductsByFilters(String filter){
-        Connection connection = ConnectionUtil.getConnection();
+        Connection connection = ConnectionSingleton.getConnection();
         try {
             //TODO: create field for tags. change sql description to tags.
             String sql = "SELECT * FROM product WHERE description contains '?';";
