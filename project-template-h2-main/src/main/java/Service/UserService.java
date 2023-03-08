@@ -1,3 +1,8 @@
+package Service;
+
+import Model.User;
+import DAO.UserDAO;
+
 public class UserService{
     private UserDAO userDAO;
 

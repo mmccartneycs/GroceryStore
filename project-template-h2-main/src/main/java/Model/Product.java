@@ -1,3 +1,5 @@
+package Model;
+
 public class Product{
     public int upc;
     public double price;

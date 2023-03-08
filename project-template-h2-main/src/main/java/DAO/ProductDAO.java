@@ -1,3 +1,11 @@
+package DAO;
+
+import Model.Product;
+import Util.ConnectionUtil;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 public class ProductDAO{
 
     public User getAllProducts(Product product){

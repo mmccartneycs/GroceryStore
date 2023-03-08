@@ -1,9 +1,16 @@
+package Service;
+
+import Model.Product;
+import Model.User;
+import DAO.ProductDAO;
+import DAO.UserDAO;
 
 public class ProductService{
     private ProductDAO productDAO;
+    private UserDAO userDAO;
 
     public ProductService(){
-        productDAO = new productDAO();
+        productDAO = new ProductDAO();
     }
 
     public User getAllProducts(Product product){

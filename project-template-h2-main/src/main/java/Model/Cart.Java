@@ -1,3 +1,5 @@
+package Model;
+
 public class Cart {
     public int account_id;
     public int cart_id;
